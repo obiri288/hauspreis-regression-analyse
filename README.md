@@ -44,18 +44,39 @@ Eine mehrstufige Strategie wurde angewendet, um fehlende Werte (`NaN`) zu behand
 
 ## Ergebnisse des Basismodells
 
-Das lineare Regressionsmodell lieferte folgende Leistung auf dem ungesehenen Testdatensatz:
+## Modellvergleich und Ergebnisse
 
-* **R² Score (Bestimmtheitsmaß):** `0.6415`
-  * *Das Modell kann ca. 64% der Varianz in den Hauspreisen erklären. Ein solider Startpunkt.*
+Um die Leistung zu bewerten, wurde zunächst ein einfaches **Lineares Regressionsmodell** als Basislinie (Baseline) trainiert. Anschließend wurde ein **RandomForest-Regressionsmodell** trainiert, um die Vorhersagegenauigkeit zu verbessern.
 
-* **Root Mean Squared Error (RMSE):** `$52,438.57`
-  * *Die Preisvorhersagen weichen im Durchschnitt um diesen Betrag vom tatsächlichen Verkaufspreis ab. Diese Metrik bestraft größere Fehler stärker.*
+### Leistungsvergleich der Modelle
 
-* **Mean Absolute Error (MAE):** `$20,684.51`
-  * *Im reinen Durchschnitt liegt der Vorhersagefehler bei ca. $20,685.*
+Die folgende Tabelle zeigt einen direkten Vergleich der Leistung beider Modelle auf dem Testdatensatz:
 
-Diese Ergebnisse dienen als Referenzwert, der mit komplexeren Modellen verbessert werden soll.
+| Metrik                      | Lineare Regression | Random Forest              |
+| --------------------------- | ------------------ | -------------------------- |
+| **R² Score** (Bestimmtheitsmaß) | `0.6415`           | `0.8916` (deutliche Verbesserung ✅) |
+| **RMSE** (Fehler in USD)    | `$52,438.57`       | `$28,832.35` (Fehler fast halbiert ✅) |
+
+Wie die Tabelle zeigt, übertrifft das RandomForest-Modell das lineare Regressionsmodell in allen relevanten Metriken deutlich. Der R²-Wert steigt um ca. 25 Prozentpunkte und der durchschnittliche Vorhersagefehler (RMSE) wird fast halbiert.
+
+### Visuelle Darstellung (Random Forest)
+
+Der folgende Scatter-Plot vergleicht die tatsächlichen Verkaufspreise mit den vom (deutlich verbesserten) RandomForest-Modell vorhergesagten Preisen. Man erkennt, dass die Punkte nun deutlich enger um die rote diagonale "Perfekte Vorhersage"-Linie liegen als beim ersten Modell.
+
+![Scatter Plot des Random Forest Modells](echte vs. vorhergesagte preise (Random Forest Regressor)
+*(Stelle sicher, dass der Dateiname mit deiner hochgeladenen Bilddatei übereinstimmt. Z.B. (`echte vs. vorhergesagte preise (Random Forest Regressor).png`)*
+
+---
+
+## Analyse der Merkmalswichtigkeit (Feature Importance)
+
+Ein großer Vorteil des RandomForest-Modells ist die Möglichkeit, die Wichtigkeit der einzelnen Merkmale zu analysieren. Das Modell teilt uns mit, welche Datenpunkte am meisten zu seinen Preisvorhersagen beigetragen haben.
+
+![Top 15 Wichtigste Merkmale](wichtigste merkmale für die Hauspreis-Vorhersage.png)
+*(Stelle sicher, dass der Dateiname mit deiner hochgeladenen Bilddatei übereinstimmt. Z.B. `feature_importance.png`)*
+
+**Erkenntnisse:**
+Die Analyse zeigt, dass Merkmale wie `OverallQual` (Gesamtqualität), `GrLivArea` (Wohnfläche) und `YearBuilt` (Baujahr) erwartungsgemäß den größten Einfluss auf die Preisvorhersage haben. Dies bestätigt die Intuition und liefert wertvolle Einblicke in die Treiber der Hauspreise im Datensatz.
 
 ---
 
@@ -100,7 +121,7 @@ Das lineare Regressionsmodell dient als solide Baseline. Geplante nächste Schri
 
 ## Autor
 
-* **[DEIN NAME HIER]**
+* **Obiri Bordom**
 * GitHub: `https://github.com/obiri288`
 
 ---
