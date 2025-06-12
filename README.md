@@ -76,7 +76,7 @@ Um die Analyse und das Modelltraining nachzuvollziehen:
 1.  **Klone dieses Repository:**
     ```bash
     git clone [https://github.com/](https://github.com/)obiri288/repositories.git
-    cd [DEIN_REPOSITORY_NAME]
+    cd repositories
     ```
 
 2.  **Installiere die Abhängigkeiten:**
